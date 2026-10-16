@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/* The site is dark-only, so Aceternity's `dark:` styles always apply. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --navy-950: #060b18;
+  --navy-900: #0b1530;
+  --ink: #eaf0fa;
+  --muted: #8d9bb5;
+  --accent: #5cc8ff;
+  --electric: #1e5bff;
+  --teal: #12c2b0;
+  --amber: #ff9f5a;
+  --sky: #3fa8ff;
+}
+
+@theme inline {
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-electric: var(--electric);
+  --color-teal: var(--teal);
+  --color-amber: var(--amber);
+  --color-sky: var(--sky);
+
+  --font-sans: var(--font-jakarta);
+  --font-serif: var(--font-instrument);
+  --font-mono: var(--font-geist-mono);
+
+  /* Aceternity: Background Gradient Animation */
+  --animate-first: moveVertical 30s ease infinite;
+  --animate-second: moveInCircle 20s reverse infinite;
+  --animate-third: moveInCircle 40s linear infinite;
+  --animate-fourth: moveHorizontal 40s ease infinite;
+  --animate-fifth: moveInCircle 20s ease infinite;
+
+  /* Aceternity: Infinite Moving Cards */
+  --animate-scroll: scroll var(--animation-duration, 40s)
+    var(--animation-direction, forwards) linear infinite;
+
+  @keyframes moveHorizontal {
+    0% { transform: translateX(-50%) translateY(-10%); }
+    50% { transform: translateX(50%) translateY(10%); }
+    100% { transform: translateX(-50%) translateY(-10%); }
+  }
+  @keyframes moveInCircle {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes moveVertical {
+    0% { transform: translateY(-50%); }
+    50% { transform: translateY(50%); }
+    100% { transform: translateY(-50%); }
+  }
+  @keyframes scroll {
+    to { transform: translate(calc(-50% - 0.5rem)); }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--navy-950);
+}
+
+body {
+  background: var(--navy-950);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgb(92 200 255 / 0.3);
+}
+
+@utility glass {
+  background: rgb(255 255 255 / 0.055);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow:
+    0 30px 80px -30px rgb(0 0 0 / 0.6),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+@utility glass-strong {
+  background: rgb(255 255 255 / 0.085);
+}
+
+@utility text-gradient {
+  background: linear-gradient(90deg, var(--sky), var(--teal) 55%, var(--amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-first,
+  .animate-second,
+  .animate-third,
+  .animate-fourth,
+  .animate-fifth,
+  .animate-scroll {
+    animation: none;
+  }
+}

@@ -1,0 +1,4 @@
+# Copy to worker/.dev.vars for local `npm run dev:chat`. In production use:
+#   npx wrangler secret put LLM_API_KEY --config worker/wrangler.jsonc
+# Free key: https://console.groq.com/keys
+LLM_API_KEY=

@@ -1,0 +1,21 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "michella-portfolio-chat",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "build": {
+    "command": "node scripts/build-knowledge.mjs"
+  },
+  "vars": {
+    "ALLOWED_ORIGINS": "https://michella-arlene.github.io,http://localhost:3000"
+  },
+  // 10 questions per visitor IP per minute
+  "ratelimits": [
+    {
+      "name": "CHAT_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 10, "period": 60 }
+    }
+  ],
+  "observability": { "enabled": true }
+}
